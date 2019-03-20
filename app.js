@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 app.use(express.json());
 
 const meals = [
@@ -12,7 +15,7 @@ const meals = [
 ];
 
 app.get('/', (req, res) => {
-    res.send('Welcome to ritadel catering services');
+    res.render('index', { title: 'My App', message: 'FUCK PUGGGGGGGGGGGGGGGGGGGGGGGGGGG'});
 });
 
 app.get('/api/meals', (req, res) => {
