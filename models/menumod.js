@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const {mealSchema} = require('./meal');
 
 // Mongoose Validate Menu Schema
 const menuSchema = new mongoose.Schema({
-    meal: Object
+    mealItem: mealSchema
+       
 });
 
 const Menu = mongoose.model('Menu', menuSchema);
