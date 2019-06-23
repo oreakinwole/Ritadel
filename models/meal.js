@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 // Joi Validate Meal Schema
 function validateMeal(meal) {
     const schema = {
-        name:Joi.string().min(1).max(100).required(),
-        price:Joi.number().min(1).max(200).required()
+        name:Joi.string().min(1).required(),
+        price:Joi.number().min(1).required()
     }; 
     return Joi.validate(meal, schema);
 }
@@ -16,18 +16,17 @@ const mealSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 1,
-        maxlength: 100
+        minlength: 1
     },
     price: {
         type: Number,
         required: true,
-        minlength: 1,
-        maxlength: 200
+        minlength: 1
     }
 });
 
 const Meal = mongoose.model('Meal', mealSchema);
 
+exports.mealSchema = mealSchema;
 exports.Meal = Meal;
 exports.validate = validateMeal;
