@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 // Joi Validate User Schema
 function validateUser(user) {
     const schema = {
-        name:Joi.string().min(2).max(100).required(),
+        username:Joi.string().min(2).max(100).required(),
         email:Joi.string().min(1).max(200).required().email(),
         password:Joi.string().min(5).max(1024).required(),
-        isAdmin:Joi.boolean().required()
+        isAdmin:Joi.boolean()
     }; 
     return Joi.validate(user, schema);
   }
@@ -17,17 +17,16 @@ function validateUser(user) {
 
 // Mongoose Validate User Schema
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true,
         minlength: 2,
-        maxlength: 100
+        maxlength: 200
     },
 
     email: {
         type: String,
         required: true,
-        unique: true,
         minlength: 5,
         maxlength: 200
     },
@@ -45,10 +44,14 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.methods.generateAuthToken = function() {
-    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.SECRET_KEY);
+
+
+userSchema.methods.generateAuthToken = function () {
+    
+    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.SECRET_KEY, { expiresIn: 7200 });
+
     return token;
-}
+};
 
 const User = mongoose.model('User', userSchema);
 
