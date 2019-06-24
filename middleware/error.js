@@ -1,4 +1,0 @@
-module.exports = function(err, req, res, next) {
-    // Still have to log the exception
-    res.status(500).send('Something Failed.');
-  }
