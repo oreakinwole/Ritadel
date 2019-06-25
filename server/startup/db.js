@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const config = require('config');
 
 module.exports = function() {
 
     // Connection to MongoDB using mongoose
+    const db = config.get('db');
     mongoose.set('useCreateIndex',true);
-    mongoose.connect('mongodb://localhost/ritadelmealdb', { useNewUrlParser: true })
-    .then(()=> console.info('Connected to Mongo'));
+    mongoose.connect(db, { useNewUrlParser: true })
+    .then(()=> console.info(`Connected to ${db}`));
     
 };
