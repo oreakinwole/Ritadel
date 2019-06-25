@@ -9,4 +9,6 @@ require('./startup/db')();    // Connect to database, Monogo DB
   
   // port to be used for app. First option, whatever port provided in the production environment or use port 3000
     const port = process.env.PORT || 5000;
-    app.listen(port, () => console.info(`Listening on port ${port}...`));
+    const server = app.listen(port, () => console.info(`Listening on port ${port}...`));
+
+    module.exports = server;
