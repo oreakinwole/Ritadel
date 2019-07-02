@@ -8,7 +8,7 @@ const router = express.Router();
 // All Api Calls for Meals Module
 
 /* get */
-router.get('/', [authmd, admin], async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const allmeals = await Meal.find();
         res.send(allmeals);
@@ -69,11 +69,12 @@ router.delete('/:id', [authmd, admin], async (req, res, next) => {
 });
 
 /* get one*/
-router.get('/:id', [authmd, admin], async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
 
     try {
         const meal = await Meal.findById(req.params.id);
         if (!meal) return res.status(404).send('The Meal with the given ID was not found');
+
         res.send(meal);
     } catch (ex) {
         next(ex);
