@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import MealReducer from './reducers/meal';
+// import AdminMenuReducer from './reducers/adminMenu';
+// import OrderReducer from './reducers/order';
 import './index.css';
 import './vendors/ionicons-2.0.1/css/ionicons.min.css';
 import './vendors/fonts/font-awesome.min.css';
-import SetUpMeal from './components/admin/MealSetup/SetUpMeal';
+// import Menu from './components/admin/menu/AdminMenu';
+// import SetUpMeal from './components/admin/MealSetup/SetUpMeal';
+// import UserOrder from './components/userorder/UserOrder';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
@@ -15,7 +20,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store ={store}>
-    <SetUpMeal />
+       <App />
     </Provider>,
     document.getElementById('root')
     );
