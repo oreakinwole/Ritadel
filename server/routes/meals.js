@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const authmd = require('../middleware/authmd');
 const admin = require('../middleware/admin');
 const {Meal, validate} = require('../models/meal');
@@ -7,11 +8,15 @@ const router = express.Router();
 
 // All Api Calls for Meals Module
 
-/* get */
-router.get('/', async (req, res, next) => {
+/* get Meals*/
+router.get('/', [authmd, admin], async (req, res, next) => {
     try {
-        const allmeals = await Meal.find();
-        res.send(allmeals);
+        const allMeals = await Meal.find();
+        const results = _.map(allMeals, function(currentObject) {
+            return _.pick(currentObject, '_id', 'name', 'price');
+        });
+
+        res.send(results);
     }
     catch (ex) {
        next(ex);
@@ -31,7 +36,7 @@ router.post('/', [authmd, admin], async (req, res, next) => {
         });
 
         onemeal = await onemeal.save();
-        res.send(onemeal);
+        res.send('done saving meal');
     } catch (ex) {
         next(ex);
     }
