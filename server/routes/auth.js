@@ -16,7 +16,7 @@ function validate(req) {
 // All Api Calls for Auth Module
   
 /* post */
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
 
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -31,17 +31,19 @@ router.post('/', async (req, res, next) => {
 
         if (user.isAdmin === true) {
             let token = user.generateAuthToken();
-            res.send(token);
+            res.header('ritadelToken', token).send('Your are now Logged in');
         }
         else {
             let token = user.generateAuthTokenForUser();
-            res.send(token);
+            res.header('ritadelToken', token).send('Your are now Logged in');
         }
 
 
     } catch (ex) {
         next(ex);
     }
+
+    // res.send(req.body.email);
 
 });
 
