@@ -10,9 +10,12 @@ const {User, validate} = require('../models/user');
 // All Api Calls for Users Module
 
  router.get('/me', authmd, async (req, res, next) => {
+
    try {
+
     const user = await User.findById(req.user._id).select('-password');
     res.send(user);
+    
    } catch (ex) {
      next(ex);
    }
@@ -27,16 +30,19 @@ router.post('/', async (req, res, next) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
-      let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('User already registerd.');
 
     user = new User(_.pick(req.body, ['username', 'email', 'password', 'isAdmin']));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
-      await user.save();
+    await user.save();
+       
+    res.send('Welcome! You have been registered');
+    // res.redirect('http://localhost:3000');
 
-      const token = user.generateAuthTokenForUser();
-      res.header('x-auth-token', token).send(_.pick(user, ['_id', 'username', 'email', 'isAdmin'])); 
+      // const token = user.generateAuthTokenForUser();
+      // res.header('ritadelToken', token).send('Welcome! You have been registered'); 
   } catch (ex) {
     next(ex);
   } 
