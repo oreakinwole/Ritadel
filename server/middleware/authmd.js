@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 // Authorization Middleware to check for an authorized token generated when signing up or logging in
 module.exports = function (req, res, next) {
-    const token = req.header('x-auth-token');
+    const token = req.header('ritadelToken');
     if (!token) return res.status(401).send('Access denied. No token provided.');
 
     try {
