@@ -28,7 +28,7 @@ router.post('/:id', authmd, async (req, res) => {
      if (!foodOnMenu) return res.status(404).send('The Meal with the given ID was not found on the Menu');
     
 
-    const token = req.header('x-auth-token');
+    const token = req.header('ritadelToken');
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     
    
