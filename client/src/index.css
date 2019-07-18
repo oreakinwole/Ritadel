@@ -278,6 +278,14 @@ select {
     display: inline-block;
 }
 
+.admenu_button:hover {
+    color: #324617;
+}
+
+.admenu_button:visited {
+    color: #8e81f0;
+}
+
 .allorder {
     margin-left: 60px;
     margin-bottom: 20px;
