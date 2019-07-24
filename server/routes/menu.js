@@ -14,7 +14,7 @@ router.get('/', authmd, async (req, res, next) => {
     try {
         const getMenu = await Menu.find();
         const menuResults = _.map(getMenu, function(currentMenuItem) {
-            return _.pick(currentMenuItem, 'mealItem.name', 'mealItem.price');
+            return _.pick(currentMenuItem, '_id', 'mealItem._id', 'mealItem.name', 'mealItem.price');
         });
         res.send(menuResults);
     } catch (ex) {
