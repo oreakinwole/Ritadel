@@ -39,10 +39,7 @@ router.post('/', async (req, res, next) => {
     await user.save();
        
     res.send('Welcome! You have been registered');
-    // res.redirect('http://localhost:3000');
-
-      // const token = user.generateAuthTokenForUser();
-      // res.header('ritadelToken', token).send('Welcome! You have been registered'); 
+    
   } catch (ex) {
     next(ex);
   } 
