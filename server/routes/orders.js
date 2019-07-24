@@ -49,7 +49,7 @@ router.post('/:id', authmd, async (req, res) => {
 });  
 
 /* Here, Once this route is called, modified is set to true, meaning, the field 'menuId' contains false information since the name and price fields has been changed. menuId is the Id for the original meal before it was changed */
- router.put('/:id', authmd, async (req, res, next) => {
+ /* router.put('/:id', authmd, async (req, res, next) => {
     try {
         const modOrder = await Order.findByIdAndUpdate(req.params.id, {name: req.body.name, modified: true}, { new: true});
         if (!modOrder) return res.status(404).send('The Order with the given ID was not found');
@@ -70,7 +70,7 @@ router.post('/:id', authmd, async (req, res) => {
             next(ex);
         }
     
-});
+}); */
 
 
 module.exports = router;
