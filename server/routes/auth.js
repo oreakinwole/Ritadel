@@ -3,6 +3,7 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+// const cors = require('cors');
 const {User} = require('../models/user');
 
 function validate(req) {
@@ -16,7 +17,7 @@ function validate(req) {
 // All Api Calls for Auth Module
   
 /* post */
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
 
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -28,20 +29,22 @@ router.post('/', async (req, res, next) => {
     
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) return res.status(400).send('Invalid email or password.'); 
-
+     
         if (user.isAdmin === true) {
             let token = user.generateAuthToken();
-            res.send(token);
+            res.header('ritadelToken', token).send(user.username);
         }
         else {
             let token = user.generateAuthTokenForUser();
-            res.send(token);
+            res.header('ritadelToken', token).send(user.username);
         }
 
 
     } catch (ex) {
         next(ex);
     }
+
+    // res.send(req.body.email);
 
 });
 

@@ -48,14 +48,14 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function () {
     
-    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.SECRET_KEY, { expiresIn: 7200 });
+    const token = jwt.sign({ _id: this._id, username: this.username, isAdmin: this.isAdmin }, process.env.SECRET_KEY, { expiresIn: 7200 });
 
     return token;
 };
 
 userSchema.methods.generateAuthTokenForUser = function () {
     
-    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.SECRET_KEY, { expiresIn: 240 });
+    const token = jwt.sign({ _id: this._id, username: this.username, isAdmin: this.isAdmin }, process.env.SECRET_KEY, { expiresIn: 240 });
 
     return token;
 };

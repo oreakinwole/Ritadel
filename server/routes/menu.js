@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const admin = require('../middleware/admin');
 const authmd = require('../middleware/authmd');
 const express = require('express');
@@ -12,7 +13,10 @@ const { Meal} = require('../models/meal');
 router.get('/', authmd, async (req, res, next) => {
     try {
         const getMenu = await Menu.find();
-        res.send(getMenu);
+        const menuResults = _.map(getMenu, function(currentMenuItem) {
+            return _.pick(currentMenuItem, '_id', 'mealItem._id', 'mealItem.name', 'mealItem.price');
+        });
+        res.send(menuResults);
     } catch (ex) {
         next(ex);
     }
@@ -31,7 +35,7 @@ router.post('/:id', [authmd, admin], async (req, res, next) => {
             mealItem: food
     });
         menuobj = await menuobj.save();
-         res.send(menuobj); 
+         res.send('done'); 
     } catch (ex) {
         next(ex);
     }
