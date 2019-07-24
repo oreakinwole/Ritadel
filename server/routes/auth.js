@@ -3,6 +3,7 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+// const cors = require('cors');
 const {User} = require('../models/user');
 
 function validate(req) {
@@ -28,14 +29,14 @@ router.post('/', async (req, res) => {
     
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) return res.status(400).send('Invalid email or password.'); 
-
+     
         if (user.isAdmin === true) {
             let token = user.generateAuthToken();
-            res.header('ritadelToken', token).send('Your are now Logged in');
+            res.header('ritadelToken', token).send(user.username);
         }
         else {
             let token = user.generateAuthTokenForUser();
-            res.header('ritadelToken', token).send('Your are now Logged in');
+            res.header('ritadelToken', token).send(user.username);
         }
 
 
