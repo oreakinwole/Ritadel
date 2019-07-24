@@ -10,6 +10,7 @@ import App from './App';
 import ReduxThunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';
 
+// Using ReduxThunk Here to help with all asyncronous actions
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
