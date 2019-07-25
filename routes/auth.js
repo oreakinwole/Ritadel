@@ -3,7 +3,6 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
-// const cors = require('cors');
 const {User} = require('../models/user');
 
 function validate(req) {

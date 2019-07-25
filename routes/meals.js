@@ -3,7 +3,6 @@ const authmd = require('../middleware/authmd');
 const admin = require('../middleware/admin');
 const {Meal, validate} = require('../models/meal');
 const express = require('express');
-// require('cors');
 const router = express.Router();
 
 
