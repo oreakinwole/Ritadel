@@ -29,7 +29,6 @@
     "compression": "^1.7.4",
     "concurrently": "^4.1.1",
     "config": "^3.1.0",
-    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "helmet": "^3.18.0",
@@ -39,7 +38,6 @@
     "mongoose": "^5.4.19"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
     "supertest": "^4.0.2"
   }
 }
