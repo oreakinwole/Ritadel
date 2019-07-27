@@ -11,6 +11,9 @@
 # production
 /build
 
+# development
+setupProxy.js
+
 # misc
 .DS_Store
 .env.local
