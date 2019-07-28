@@ -17,11 +17,14 @@ export const forwardOrder = array => dispatch => {
         );
         
         console.log(res.data);
+        
 
     }
 
 
     array.forEach( sendallIds);
+
+    alert('Your Order has been submitted! Thank You');
    
 };
 

@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/index';
 import './index.css';
 import './vendors/ionicons-2.0.1/css/ionicons.min.css';
-import './vendors/fonts/font-awesome.min.css';
 import App from './App';
 import ReduxThunk from 'redux-thunk';
 import * as serviceWorker from './serviceWorker';

@@ -8,6 +8,12 @@ import Header from './Header';
 import MenuTable from './UserMenuTable';
 import Nav from './BottomNav';
 import { Link } from 'react-router-dom';
+import jollof from '../../img/jollof.png';
+import indomieChicken from '../../img/indc.png';
+import yamEgg from '../../img/yamegg.png';
+import porridge from '../../img/por.png';
+import indomieEgg from '../../img/inde.png';
+
 
  
 class Menu extends Component {
@@ -69,8 +75,17 @@ class Menu extends Component {
           <Header  headerTitle="Menu"/>
 
       <section className="meal_table">
-          <table>
+          <img className="user_menu_foodimage" src={jollof} alt="jollof" />
+          <img className="user_menu_foodimage" src={indomieChicken}  alt="indomieChicken" />
+          <img className="user_menu_foodimage" src={yamEgg}  alt="yamEgg" />
+          <img className="user_menu_foodimage" src={porridge} alt="porridge" />
+          <img className="user_menu_foodimage" src={indomieEgg}  alt="indomieEgg" />
+
+          <table className="usm_maintable">
+
+         
           <tbody>
+         
 
           { Menu }
 

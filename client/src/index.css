@@ -112,6 +112,11 @@ table {
 	color: #fff;
     
 }
+
+.usm_maintable {
+    color: #b06d01;
+}
+
 .meal_table {
     margin:10px auto;
     padding: 20px 20px;
@@ -201,6 +206,47 @@ select {
     text-decoration: underline;
 }
 
+/* .usm_maintable .user_menu_chars button {
+    letter-spacing: 2px;
+    font-family: "Lato";
+    
+} */
+.usermenu_addbtn {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    width: 80px;
+    margin: 20px auto;
+       
+    border: none;
+    border-radius: 30px;
+    height: 36px;
+    line-height: 36px;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    outline: 0;
+    
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(209, 185, 145, 0.74);
+    text-align: center;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    
+   }
+   
+   .usermenu_addbtn:hover {
+       background-color: rgba(245, 217, 170, 0.74);
+   }
+   
+   .usermenu_addbtn:active {
+       background-color: rgba(67, 60, 49, 0.74);
+   }
+
 .user_menu {
     display:block;
     margin: 0px auto;
@@ -216,11 +262,42 @@ select {
  
 }
 
+.user_menu_foodimage {
+    margin-right: 15px;
+    margin-bottom: 5px;
+    position:relative;
+}
+
 .meal_table span {
-    color: #433743;
+    color: #fff;
     font-size: 16px;
-    font-weight: normal;
     display: block;
+}
+
+.user_menu_chars{
+    letter-spacing: 2px;
+    font-family: "Lato";
+}
+
+
+.umchar {
+    padding-left: 58px;
+}
+
+.user_menu_chars div {
+    word-spacing: 1px;
+    font-family: "Lato";
+}
+.user_menu_chars span {
+    font-family: "Lato";
+}
+
+.meal_table .user_menu_item {
+    position: relative;
+    background-color: #fff;
+    width: 50%;
+    margin-top: -13px;
+    z-index: 10;
 }
 
 .yourorder span {
@@ -332,23 +409,3 @@ select {
     margin-left: 90%;
     background-color: rgba(56, 108, 160, 0.22);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
