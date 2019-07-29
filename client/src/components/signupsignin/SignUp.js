@@ -13,6 +13,10 @@ export default class SignUp extends Component {
         confirmPassword: ''
     }
 
+    componentDidMount() {
+        alert('After Registering, Pls Log In with registered credentials. Cheers! ');
+    }
+
     // To get the Username Input
     onUsernameChange = (e) => {
         const name = e.target.value;
@@ -43,7 +47,7 @@ export default class SignUp extends Component {
 
         //  To check if the password and confirm passwords match
         if (this.state.password !== this.state.confirmPassword) {
-            return console.log ('Your Passsword does not match, try again');
+            return alert('Your Passsword does not match, try again');
         }
 
         // Sending all the data for registering a user to the backend

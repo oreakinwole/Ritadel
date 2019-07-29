@@ -14,17 +14,32 @@ export default class Login extends Component {
     submit = async (e) => {
         e.preventDefault();
 
-        //Our Backend is Expecting and email and Password, Using axios here to send the email and password to our Express API
-        const pRequest = await axios.post('/api/auth', { "email": this.state.email, "password": this.state.password });
+        try {
+             //Our Backend is Expecting and email and Password, Using axios here to send the email and password to our Express API
+            const pRequest = await axios.post('/api/auth', { "email": this.state.email, "password": this.state.password });
 
-        // Making use of the session storage in the brower here to store the token given to us by the Server
-        sessionStorage.setItem('ritadeltoken', pRequest.headers.ritadeltoken);
+             // Making use of the session storage in the brower here to store the token given to us by the Server
+            sessionStorage.setItem('ritadeltoken', pRequest.headers.ritadeltoken);
+            //Emptying all the data in the state because we have gotten the data we need
+            this.setState( { email: '', password: '' });
 
-        //Emptying all the data in the state because we have gotten the data we need
-        this.setState( { email: '', password: '' });
+            sessionStorage.setItem( 'currentUser', pRequest.data);
+            window.location.assign("/usermenu");
+            
+        } catch (error) {
 
-        sessionStorage.setItem( 'currentUser', pRequest.data);
-        window.location.assign("/usermenu");
+            if (error.response.status === 400) {
+                return alert('Invalid email or password.');
+            }else{
+                return console.log(error);
+            }
+            
+        }
+
+       
+       
+
+       
 
     };
 
