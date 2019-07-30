@@ -75,12 +75,13 @@ class Menu extends Component {
           <Header  headerTitle="Menu"/>
 
       <section className="meal_table">
+        <div className="animated bounceIn slower">
           <img className="user_menu_foodimage" src={jollof} alt="jollof" />
           <img className="user_menu_foodimage" src={indomieChicken}  alt="indomieChicken" />
           <img className="user_menu_foodimage" src={yamEgg}  alt="yamEgg" />
           <img className="user_menu_foodimage" src={porridge} alt="porridge" />
           <img className="user_menu_foodimage" src={indomieEgg}  alt="indomieEgg" />
-
+        </div>
           <table className="usm_maintable">
 
          
