@@ -1,5 +1,4 @@
 *{
-	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -36,6 +35,14 @@ a {
 a:link,
 a:visited {
 	color:#fff;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+:-ms-input-placeholder {
+    color: #fff;
 }
 
 ::placeholder {
