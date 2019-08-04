@@ -439,3 +439,10 @@ select {
 }
     
 }
+
+/* Small phones to small tablets: from 481px to 767px */
+@media only screen and (max-width: 767px) {
+    .big_wrapper {
+        width: 100%;
+    }
+}
