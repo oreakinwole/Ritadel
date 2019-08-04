@@ -51,7 +51,7 @@ a:visited {
 
 
 h1 {
-    font-size: 50px;
+    font-size: 300%;
 }
  .big_wrapper{
     display: block;
@@ -60,14 +60,16 @@ h1 {
      background-size: cover;
 	border: none;
 	text-align: left;
-	width: 800px;
+	width: 50%;
 	overflow-x:auto;
 	
 	}
 header{
-    background-image: url(./img/logo_red.png);
+    background: url(./img/logo_red.png) no-repeat center;
+    background-size: contain;
     margin: 15px auto;
-    width: 439px;
+    text-align: center;
+    width: 66.13%;
     height: 271px;
 }
 
@@ -125,9 +127,11 @@ table {
 }
 
 .meal_table {
+    overflow-x:auto;
+    overflow-y:hidden;
     margin:10px auto;
     padding: 20px 20px;
-    width: 700px;
+    width: 89%;
     height:auto;
     background-color: rgba(202, 227, 189, 0.16);
     border-radius: 20px;
@@ -213,11 +217,6 @@ select {
     text-decoration: underline;
 }
 
-/* .usm_maintable .user_menu_chars button {
-    letter-spacing: 2px;
-    font-family: "Lato";
-    
-} */
 .usermenu_addbtn {
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -255,7 +254,6 @@ select {
    }
 
 .user_menu {
-    display:block;
     margin: 0px auto;
     text-transform: uppercase;
     background-image: none;
@@ -264,13 +262,13 @@ select {
     height: auto;
 }
 .user_menu h1 {
-    margin: 0px 250px 0px 315px;
    display: inline-block;
- 
 }
 
 .user_menu_foodimage {
-    margin-right: 15px;
+    max-width: 100%;
+    height:auto;
+    margin-right: 2%;
     margin-bottom: 5px;
     position:relative;
 }
@@ -286,9 +284,8 @@ select {
     font-family: "Lato";
 }
 
-
 .umchar {
-    padding-left: 58px;
+    padding-left: 4%;
 }
 
 .user_menu_chars div {
@@ -321,31 +318,39 @@ select {
 
 .usernav {
     text-align: left;
-    display: inline-block;
     background-color: rgb(69, 11, 11);
     width: 100%;
-    height: 55px;
+    height: auto;
 }
 
 
 /* Icons */
-.icon-big {
-    padding-left:100px;
-	font-size:300%;
+.usernav i,
+.usernav span {
+    display: inline-block;
+    margin-left:12%;
 	color:#e67e22;
 }
-.icon-big:hover {
-     color:#5c4735;
+.usernav i {
+    font-size: 250%;
 }
 
-.loggeduser {
-    margin-left:100px;
-    font-size: 15px;
-   color:#f3faa3;
-    background-color: #4d2624;
+.usernav span {
+    font-size: 150%;
 }
+.usernav span:last-child {
+    padding: 0 1%;
+     background-color: #4d2624;
+}
+
+.usernav i:hover {
+    color:#5c4735;
+}
+
 .log-out-ic-big {
-    display: inline-block;
+    float: right;
+    margin-right: 4%;
+    /* display: inline-block; */
 	font-size:250%;
    
 }
@@ -378,7 +383,7 @@ select {
     display: block;
 }
 .modifymealprice {
-    font-size: 30px;;
+    font-size: 30px;
 }
 
 .rightform {
@@ -415,4 +420,22 @@ select {
     color:rgba(252, 255, 255, 0.91);    
     margin-left: 90%;
     background-color: rgba(56, 108, 160, 0.22);
+}
+
+/* Big tablet to 1200px (widths smaller than the 1140px row) */
+@media only screen and (max-width: 1200px) {
+   
+    /* Icons */
+.usernav i,
+.usernav span {
+    margin-left:11%;
+}
+.usernav i {
+    font-size: 200%;
+}
+
+.usernav span {
+    font-size: 100%;
+}
+    
 }
