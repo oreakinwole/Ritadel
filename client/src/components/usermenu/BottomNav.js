@@ -7,11 +7,11 @@ const Nav = props => (
  
 <section className="usernav">
     
-    <i className="ion-android-home icon-big" />
-    <i className="ion-android-delete icon-big" />
-    <span className="icon-items"> { props.allOrdersLength} </span>
-    <Link to="/userorder"><i className="ion-android-cart icon-big" /></Link>
-    <span className="loggeduser"> { props.username }</span>
+    <i className="ion-android-home" />
+    <i className="ion-android-delete" />
+    <span> { props.allOrdersLength} </span>
+    <Link to="/userorder"><i className="ion-android-cart"/></Link>
+    <span> { props.username }</span>
     
 </section>
    
