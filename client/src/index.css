@@ -221,7 +221,7 @@ select {
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     display: inline-block;
-    width: 80px;
+    width: 70%;
     margin: 20px auto;
        
     border: none;
@@ -231,7 +231,7 @@ select {
     text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 60%;
     font-weight: bold;
     outline: 0;
     
@@ -280,7 +280,7 @@ select {
 }
 
 .user_menu_chars{
-    letter-spacing: 2px;
+    letter-spacing: 1%;
     font-family: "Lato";
 }
 
@@ -289,7 +289,7 @@ select {
 }
 
 .user_menu_chars div {
-    word-spacing: 1px;
+    word-spacing: 1%;
     font-family: "Lato";
 }
 .user_menu_chars span {
@@ -299,7 +299,7 @@ select {
 .meal_table .user_menu_item {
     position: relative;
     background-color: #fff;
-    width: 50%;
+    width: 100%;
     margin-top: -13px;
     z-index: 10;
 }
