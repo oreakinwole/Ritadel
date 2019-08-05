@@ -451,4 +451,12 @@ select {
     input[type=email]:not(.browser-default) {
       width: 70%;
     }
+
+    .usermenu_addbtn {
+        width: 100%;
+    }
+    
+    .meal_table .user_menu_item {
+        width: 100%;
+    }
 }
