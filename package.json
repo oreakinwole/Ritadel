@@ -36,7 +36,7 @@
     "joi": "^13.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.4.19"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "jest": "^24.7.1",
