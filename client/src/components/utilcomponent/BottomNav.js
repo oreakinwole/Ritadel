@@ -16,6 +16,9 @@ const BottomNav = styled.section`
     position: fixed;
     width: 600px;
     bottom: 0;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 
     div{
 
@@ -45,9 +48,11 @@ const Nav = props => (
         <Link to={props.firstIconLink}> <img src={props.firstIcon} alt={props.firstIconalt}/></Link>
     </div>
 
-    <div>
+    {
+    props.trash && <div>
         <img className= "trash" src={trashIcon} alt="trash" />
     </div>
+    }
 
     <h2>{props.title} {props.allOrdersLength && props.allOrdersLength} </h2>
 
