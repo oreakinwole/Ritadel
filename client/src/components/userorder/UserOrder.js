@@ -103,7 +103,7 @@ class UserOrder extends Component {
 
       </MealContentDiv>
 
-      <Nav firstIcon={backIcon} firstIconalt="go back" firstIconLink="/usermenu" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="orders"/>
+      <Nav firstIcon={backIcon} firstIconalt="go back" firstIconLink="/usermenu" trash allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="orders"/>
     </>
     )
   }
