@@ -10,7 +10,7 @@ const { Menu} = require('../models/menumod');
 const { User} = require('../models/user');
 
 // All Api Calls for Orders Module
-router.get('/', [authmd, admin], async (req, res, next) => {
+router.get('/', /* [authmd, admin], */ async (req, res, next) => {
 
     try {
         const getOrders = await Order.find();
@@ -38,6 +38,7 @@ router.post('/:id', authmd, async (req, res) => {
         menuId: req.params.id,
         name: foodOnMenu.mealItem.name,
         price: foodOnMenu.mealItem.price,
+        imageUrl: foodOnMenu.mealItem.imageUrl,
         byUser: finduserEmail.email,
         date: today_date.toLocaleDateString(),
         time: today_date.toLocaleTimeString()

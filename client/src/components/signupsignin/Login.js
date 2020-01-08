@@ -1,8 +1,87 @@
 import React, { Component } from 'react';
+import  styled from 'styled-components';
+import { toast } from 'react-toastify';
 import RitHeader from './RitadelLogoHeader';
+
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import pattern from '../../assets/img/pattern.jpg';
  
+export const LoginSigupWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: -webkit-linear-gradient(right top, rgba(199,53,56,1), rgba(245,133,41,0.8)), url(${pattern}) no-repeat;
+    background-size: cover;
+`;
+
+export const LoginSigupDiv = styled.div`
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 90vh;
+    background-color: rgba(202, 227, 189, 0.16);
+    border-radius: 20px;
+    color: #fff;
+    
+    h1{
+        font-size: 3em;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // background-color: #000;
+        width: 90%;
+        
+        input{
+            color: #fff;
+            margin-top: 40px;
+            background: none;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 10px;
+            font-size: 1.2em;
+            width: 80%;
+
+            ::placeholder {
+                color: #fff;
+            }
+            
+        }
+
+        button{
+            outline: 0;
+            border: none;
+            margin: 20px auto;
+            padding 0 15px;
+            border-radius: 2px;
+            height: 36px;
+            font-size: 16px;
+            background-color: #26a69a;
+            text-align: center;
+            letter-spacing: .5px;
+            color: #fff;
+            cursor: pointer;
+            
+            &:hover {
+                background-color: #74ac33;
+            }
+        }
+    }
+    p{
+        margin-top: 40px;
+    }
+    a{
+        color: #fff;
+    }
+`;
 export default class Login extends Component {
 
     state = {
@@ -29,7 +108,7 @@ export default class Login extends Component {
         } catch (error) {
 
             if (error.response.status === 400) {
-                return alert('Invalid email or password.');
+                toast.error('Invalid email or password.');
             }else{
                 return console.log(error);
             }
@@ -57,34 +136,36 @@ export default class Login extends Component {
 
     render() { 
         return (
-            <div className="meal_table">
-        <RitHeader />
+            <LoginSigupWrap>
 
-        <section>
-            <form onSubmit = { this.submit } >
-            <h1>Log In</h1>
-            
-                <input 
-                type="email"
-                 name="email" 
-                 value={ this.state.email } 
-                 onChange={ this.onEmailChange }
-                 placeholder="Email" 
-                 />
+                <LoginSigupDiv>
 
-                <input 
-                type="password" 
-                name="password"
-                value = { this.state.password } 
-                onChange={ this.onPasswordChange }
-                placeholder="Password" 
-                /> 
-                 
-            <button type="submit" className="btn">Log in </button> 
-                <p className="new-user">Are you a new user? &nbsp;<Link to="/register" className="frmparag">Sign up</Link></p>
-            </form>
-        </section>
-            </div>
+                    <RitHeader />
+                        <h1>Log In</h1>
+                        <form onSubmit = { this.submit } >
+                            
+                            
+                                <input 
+                                type="email"
+                                name="email" 
+                                value={ this.state.email } 
+                                onChange={ this.onEmailChange }
+                                placeholder="Email" 
+                                />
+
+                                <input 
+                                type="password" 
+                                name="password"
+                                value = { this.state.password } 
+                                onChange={ this.onPasswordChange }
+                                placeholder="Password" 
+                                /> 
+                                
+                         <button type="submit">Log in </button> 
+                            <p>Are you a new user? &nbsp;<Link to="/register" className="frmparag">Sign up</Link></p>
+                        </form>
+                </LoginSigupDiv>
+            </LoginSigupWrap>
         );
     }
 }

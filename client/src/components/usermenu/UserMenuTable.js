@@ -18,7 +18,7 @@ const MenuTable = ({ name, price, url, index, id, sendToOrderState }) => (
            
 
             <div className= "add-div">
-                <img src={add} className="add-icon" alt="add" onClick ={ ()=> sendToOrderState(id)} />
+                <img src={add} className="add-icon" alt="add" onClick ={ ()=> sendToOrderState(id, name, price)} />
             </div>
     </MealItemDiv>
 

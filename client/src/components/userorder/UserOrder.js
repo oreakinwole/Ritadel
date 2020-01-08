@@ -9,22 +9,16 @@ import Header from '../utilcomponent/Header';
 import OrderTable from './UserOrderTable';
 import Nav from '../../components/utilcomponent/BottomNav';
 import backIcon from '../../assets/img/icons/back-arrow.png';
-
-export const OrderContentDiv = styled.section`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  border-radius: 20px;
-  width: 80%;
-`;
+import {MealContentDiv} from '../usermenu/stlye'
 
 export const OrderItemDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   color: #fff;
   letter-spacing: .1em;
+  margin-top: 20px;
 
   img{
     width: 4em;
@@ -49,13 +43,13 @@ class UserOrder extends Component {
     orders: []
   }
 
-  /* componentDidMount() {
+  componentDidMount() {
 
    this.props.getOrders();
 
    this.setState( { orders: this.props.preOrder });
 
-  } */
+  }
 
   executeOrder = () => {
     let arrayOfIDs =this.state.orders.map(item => {
@@ -81,35 +75,35 @@ class UserOrder extends Component {
 
     return (
     <>
-      <Header headerTitle="Orders" nexticon={true} link= "#" actionFunction = { this.executeOrder } />
+      <Header headerTitle="Orders" nexticon={true} link= "/ordersuccess" actionFunction = { this.executeOrder } />
 
-      <OrderContentDiv>
-
-          <OrderItemDiv>
-            {/* {
+      <MealContentDiv> 
+          {
               preOrder.map((item, index) => (
-              <OrderTable
-                index = {index} 
-                name = {item.name}
-                price={item.price}
-                key={item.name}     
-              />
+                <OrderItemDiv>  
+                  <OrderTable
+                    index = {index} 
+                    name = {item.name}
+                    price={item.price}
+                    key={item.index}     
+                  />
+                </OrderItemDiv>
             ))
-            } */}
+            }
 
+        <OrderItemDiv> 
+          <>
               <div className="nameprice">
-                <h2> Jollof & meat </h2>
-                <p> remove </p>
+                  <h2> Total price </h2>
               </div>
 
-              <h2> 500 </h2>
-            
-            
-          </OrderItemDiv>
+                  <h2> {totalPrice} </h2>
+          </>
+        </OrderItemDiv>
 
-      </OrderContentDiv>
+      </MealContentDiv>
 
-      <Nav firstIcon={backIcon} firstIconalt="go back" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="orders"/>
+      <Nav firstIcon={backIcon} firstIconalt="go back" firstIconLink="/usermenu" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="orders"/>
     </>
     )
   }

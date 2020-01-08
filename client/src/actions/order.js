@@ -23,8 +23,6 @@ export const forwardOrder = array => dispatch => {
 
 
     array.forEach( sendallIds);
-
-    alert('Your Order has been submitted! Thank You');
    
 };
 

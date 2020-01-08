@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import trashIcon from '../../assets/img/icons/trash.png';
@@ -42,7 +42,7 @@ const Nav = props => (
 <BottomNav>
     
     <div>
-        <img src={props.firstIcon} alt={props.firstIconalt}/>
+        <Link to={props.firstIconLink}> <img src={props.firstIcon} alt={props.firstIconalt}/></Link>
     </div>
 
     <div>
@@ -51,7 +51,7 @@ const Nav = props => (
 
     <h2>{props.title} {props.allOrdersLength && props.allOrdersLength} </h2>
 
-    <h3> Tochukwu </h3>
+    <h3> {props.username} </h3>
     
 </BottomNav>
    

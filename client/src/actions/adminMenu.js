@@ -11,7 +11,6 @@ export const getMealsfromDbAsMenu = () => async dispatch => {
      });
 
      dispatch({ type: GET_MEALS, payload: res.data });
-    
    
 };
 
@@ -25,9 +24,6 @@ export const postMeal = (id) => async dispatch => {
     }
 
     );
-    
-    console.log(res);
-    // dispatch({ type: AdminMenuActionTypes.POST_ITEM, id });
 
 };
 

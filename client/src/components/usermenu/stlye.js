@@ -9,7 +9,7 @@ export const MealContentDiv = styled.section`
   border-radius: 20px;
   width: 90%;
   margin-top: 20px;
-  padding: 20px 20px;
+  padding: 0 20px 20px;
 `;
 
 export const MealItemDiv = styled.div`
@@ -18,6 +18,7 @@ export const MealItemDiv = styled.div`
   justify-content: space-between;
   width: 100%;
   color: #fff;
+  margin-top: 10px;
 
   .food-details{
     display: flex;

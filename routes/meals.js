@@ -9,7 +9,7 @@ const router = express.Router();
 // All Api Calls for Meals Module
 
 /* get Meals*/
-router.get('/', /*  [authmd, admin], */ async (req, res, next) => {
+router.get('/',  [authmd, admin], async (req, res, next) => {
     try {
         const allMeals = await Meal.find();
         const results = _.map(allMeals, function(currentObject) {
@@ -25,7 +25,7 @@ router.get('/', /*  [authmd, admin], */ async (req, res, next) => {
 });
 
 /* post */
-router.post('/', /* [authmd, admin], */ async (req, res, next) => {
+router.post('/', [authmd, admin], async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
    
@@ -45,7 +45,7 @@ router.post('/', /* [authmd, admin], */ async (req, res, next) => {
 });
 
 /* put */
-router.put('/:id',/*  [authmd, admin], */ async (req, res, next) => {
+router.put('/:id', [authmd, admin], async (req, res, next) => {
     
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -61,7 +61,7 @@ router.put('/:id',/*  [authmd, admin], */ async (req, res, next) => {
 });
 
 /* delete*/
-router.delete('/:id',/*  [authmd, admin], */ async (req, res, next) => {
+router.delete('/:id', [authmd, admin], async (req, res, next) => {
 
     try {
         const meal = await Meal.findByIdAndRemove(req.params.id);

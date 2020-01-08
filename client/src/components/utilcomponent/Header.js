@@ -18,6 +18,7 @@ const HeaderWrapperDiv = styled.header`
     }
 
     img{
+        cursor: pointer;
         width: 2em;
     }
 `;
@@ -45,7 +46,7 @@ const Header = props => (
             }
         { props.nexticon &&
         <div>
-        <Link to={props.link}> <img src={nextIcon} alt="next" onClick={()=> props.actionFunction } /> </Link>
+        <Link to={props.link}> <img src={nextIcon} alt="next" onClick={ props.actionFunction } /> </Link>
         </div>
         }
            

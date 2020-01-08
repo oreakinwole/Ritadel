@@ -10,7 +10,7 @@ const { Meal} = require('../models/meal');
 // All Api Calls for Menu Module
 
 /* get */
-router.get('/', /* authmd, */ async (req, res, next) => {
+router.get('/', authmd, async (req, res, next) => {
     try {
         const getMenu = await Menu.find();
         const menuResults = _.map(getMenu, function(currentMenuItem) {
@@ -25,7 +25,7 @@ router.get('/', /* authmd, */ async (req, res, next) => {
 
 
 /* post */
-router.post('/:id', /* [authmd, admin], */ async (req, res, next) => {
+router.post('/:id', [authmd, admin], async (req, res, next) => {
 
     try {
         const food = await Meal.findById(req.params.id);
