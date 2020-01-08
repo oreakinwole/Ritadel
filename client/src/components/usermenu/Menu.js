@@ -11,7 +11,6 @@ import homeIcon from '../../assets/img/icons/home.png';
 
 import { MealContentDiv} from './stlye';
 
-import add from '../../assets/img/icons/add.png';
 
 
  
