@@ -1,34 +1,37 @@
 import styled from 'styled-components';
+import pattern from '../../assets/img/pattern.jpg'
 
 export const MealContentDiv = styled.section`
   display: flex;
   flex-direction: column;
-  background-color: #000;
+  background: -webkit-linear-gradient(right top, rgba(199,53,56,1), rgba(245,133,41,0.8)), url(${pattern}) no-repeat;
+  background-size: cover;
   border-radius: 20px;
-  width: 80%;
+  width: 90%;
   margin-top: 20px;
-  // margin-bottom: 20px;
+  padding: 20px 20px;
 `;
 
 export const MealItemDiv = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  // background-color: green;
-  margin-top: 20px;
+  justify-content: space-between;
   width: 100%;
   color: #fff;
-  
 
-  img{
-    width: 4em;
-  }
-  .add-icon{
-    width: 2em;
-    cursor: pointer;
-  }
-  .nameprice{
+  .food-details{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    img{
+      margin-right: 20px;
+    }
+  }
+
+  .add-div{
+    img{
+      width: 30px;
+      cursor: pointer;
+    }
+    
   }
 `;
