@@ -5,17 +5,19 @@ import { MealItemDiv } from './stlye';
 
 const MenuTable = ({ name, price, url, index, id, sendToOrderState }) => (
     <MealItemDiv>
+            <div className= "food-details">
+                <div>
+                <img src={url} alt={url.split('App/')[1]} />
+                </div>
 
-            <div>
-            <img src={url} alt={url.split('App/')[1]} />
+                <div className="nameprice">
+                    <h3> {name} </h3>
+                    <p> {price} </p>
+                </div>
             </div>
+           
 
-            <div className="nameprice">
-                <h3> {name} </h3>
-                <p> {price} </p>
-            </div>
-
-            <div>
+            <div className= "add-div">
                 <img src={add} className="add-icon" alt="add" onClick ={ ()=> sendToOrderState(id)} />
             </div>
     </MealItemDiv>
