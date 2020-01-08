@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as MenuActionCreators from '../../actions/menu';
 import * as PreOrderActionCreators from '../../actions/preOrder';
-import Header from './Header';
+import Header from '../utilcomponent/Header';
 import MenuTable from './UserMenuTable';
-import Nav from './BottomNav';
-import { Link } from 'react-router-dom';
-import jollof from '../../img/jollof.png';
-import indomieChicken from '../../img/indc.png';
-import yamEgg from '../../img/yamegg.png';
-import porridge from '../../img/por.png';
-import indomieEgg from '../../img/inde.png';
+import Nav from '../utilcomponent/BottomNav';
+import homeIcon from '../../assets/img/icons/home.png';
+
+import { MealContentDiv} from './stlye';
+
+import add from '../../assets/img/icons/add.png';
 
 
  
@@ -58,54 +57,36 @@ class Menu extends Component {
 
     const { menu } = this.props;
 
-    const Menu =  menu.map((item, index) => (
-
-      <MenuTable
-            id = { item._id }
-            index = {index} 
-            name = {item.mealItem.name}
-            price={item.mealItem.price}
-            key={item.mealItem.name}
-            sendToOrderState = { this.sendToOrderState }      
-      />
-    ));
-
     return (
-      <div>
-          <Header  headerTitle="Menu"/>
+      <>
+        <Header  headerTitle="MENU" nexticon={true} link= "/userorder" actionFunction = { this.sendToOrdersReducer }/>
 
-      <section className="meal_table">
-        <div className="animated bounceIn slower">
-          <img className="user_menu_foodimage" src={jollof} alt="jollof" />
-          <img className="user_menu_foodimage" src={indomieChicken}  alt="indomieChicken" />
-          <img className="user_menu_foodimage" src={yamEgg}  alt="yamEgg" />
-          <img className="user_menu_foodimage" src={porridge} alt="porridge" />
-          <img className="user_menu_foodimage" src={indomieEgg}  alt="indomieEgg" />
-        </div>
-          <table className="usm_maintable">
+        <MealContentDiv>
 
-         
-          <tbody>
-         
+           {
+              menu.map((item, index) => (
+              <MenuTable
+                    id = { item._id }
+                    index = {index} 
+                    name = {item.mealItem.name}
+                    price={item.mealItem.price}
+                    url={item.mealItem.imageUrl}
+                    key={item.mealItem.name}
+                    sendToOrderState = { this.sendToOrderState }      
+              />
+            ))
+            }
 
-          { Menu }
+        </MealContentDiv>
 
-          </tbody>
 
-          </table>
-          
-       </section>
-
-        <Link to="/userorder" className="btn" onClick = { this.sendToOrdersReducer }> Next </Link>
-
-        <Nav allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } />
-       </div>
+        <Nav firstIcon={homeIcon} firstIconalt="home" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="ITEMS: " />
+      </>
     );
   }
 }
 
 //this is calling our Menu state in the Index reducer file
-
 const mapStateToProps = state => (
   {
         menu: state.menu

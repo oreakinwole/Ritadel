@@ -2,11 +2,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 import * as PreOrderActionCreators from '../../actions/preOrder';
 import * as OrderActionCreators from '../../actions/order';
-import Header from '../usermenu/Header';
+import Header from '../utilcomponent/Header';
 import OrderTable from './UserOrderTable';
-import Nav from '../userorder/BottomNav';
+import Nav from '../../components/utilcomponent/BottomNav';
+import backIcon from '../../assets/img/icons/back-arrow.png';
+
+export const OrderContentDiv = styled.section`
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  border-radius: 20px;
+  width: 80%;
+`;
+
+export const OrderItemDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  color: #fff;
+  letter-spacing: .1em;
+
+  img{
+    width: 4em;
+  }
+  .add-icon{
+    width: 2em;
+  }
+  .nameprice{
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 
 class UserOrder extends Component {
@@ -19,16 +49,15 @@ class UserOrder extends Component {
     orders: []
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
 
    this.props.getOrders();
 
    this.setState( { orders: this.props.preOrder });
 
-  }
+  } */
 
   executeOrder = () => {
-
     let arrayOfIDs =this.state.orders.map(item => {
       return item.id;
     });
@@ -44,51 +73,45 @@ class UserOrder extends Component {
   }
 
   render() { 
-
     const { preOrder } = this.props;
-
-    
-
-    const Order =  preOrder.map((item, index) => (
-
-      <OrderTable
-            index = {index} 
-            name = {item.name}
-            price={item.price}
-            key={item.name}
-      
-      />
-    ));
-
+  
       const totalPrice = preOrder.reduce((total, meal) => {
         return total + meal.price;
       }, 0);
 
     return (
-    <div>
-      <Header headerTitle="Order" />
+    <>
+      <Header headerTitle="Orders" nexticon={true} link= "#" actionFunction = { this.executeOrder } />
 
-      <section className="meal_table">
+      <OrderContentDiv>
 
-          <table className="yourorder">
-            <tbody>
+          <OrderItemDiv>
+            {/* {
+              preOrder.map((item, index) => (
+              <OrderTable
+                index = {index} 
+                name = {item.name}
+                price={item.price}
+                key={item.name}     
+              />
+            ))
+            } */}
 
-            { Order }
+              <div className="nameprice">
+                <h2> Jollof & meat </h2>
+                <p> remove </p>
+              </div>
 
-            <tr>
-            <td>Total</td>
-            <td>{ totalPrice }</td>
-            </tr>
+              <h2> 500 </h2>
+            
+            
+          </OrderItemDiv>
 
-             </tbody>
-          </table>
+      </OrderContentDiv>
 
-      <button className="btn" onClick = { this.executeOrder }> Confirm </button>
-      </section>
-        <Nav username =  { this.getUser() } /> 
-
-    </div>
-    );
+      <Nav firstIcon={backIcon} firstIconalt="go back" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="orders"/>
+    </>
+    )
   }
 }
 

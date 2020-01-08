@@ -22,6 +22,10 @@ const mealSchema = new mongoose.Schema({
         type: Number,
         required: true,
         minlength: 1
+    },
+    imageUrl: {
+        type: String,
+        minlength: 1
     }
 });
 

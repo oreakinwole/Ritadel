@@ -9,11 +9,11 @@ const router = express.Router();
 // All Api Calls for Meals Module
 
 /* get Meals*/
-router.get('/',   [authmd, admin], async (req, res, next) => {
+router.get('/', /*  [authmd, admin], */ async (req, res, next) => {
     try {
         const allMeals = await Meal.find();
         const results = _.map(allMeals, function(currentObject) {
-            return _.pick(currentObject, '_id', 'name', 'price');
+            return _.pick(currentObject, '_id', 'name', 'price', 'imageUrl');
         });
 
         res.send(results);
@@ -25,14 +25,15 @@ router.get('/',   [authmd, admin], async (req, res, next) => {
 });
 
 /* post */
-router.post('/', [authmd, admin], async (req, res, next) => {
+router.post('/', /* [authmd, admin], */ async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
    
     try {
         let onemeal = new Meal({ 
             name: req.body.name,
-            price: req.body.price
+            price: req.body.price,
+            imageUrl: req.body.imageUrl
         });
 
         onemeal = await onemeal.save();
@@ -44,13 +45,13 @@ router.post('/', [authmd, admin], async (req, res, next) => {
 });
 
 /* put */
-router.put('/:id', [authmd, admin], async (req, res, next) => {
+router.put('/:id',/*  [authmd, admin], */ async (req, res, next) => {
     
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
-        const meal = await Meal.findByIdAndUpdate(req.params.id, {name: req.body.name, price: req.body.price}, { new: true});
+        const meal = await Meal.findByIdAndUpdate(req.params.id, {name: req.body.name, price: req.body.price, imageUrl: req.body.imageUrl}, { new: true});
         if (!meal) return res.status(404).send('The Meal with the given ID was not found');
         res.send('done');
     } catch (ex) {
@@ -60,7 +61,7 @@ router.put('/:id', [authmd, admin], async (req, res, next) => {
 });
 
 /* delete*/
-router.delete('/:id', [authmd, admin], async (req, res, next) => {
+router.delete('/:id',/*  [authmd, admin], */ async (req, res, next) => {
 
     try {
         const meal = await Meal.findByIdAndRemove(req.params.id);

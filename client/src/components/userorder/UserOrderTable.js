@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OrderTable = props => (
+const OrderTable = ({index, name, price}) => (
+    <>
+    <div className="nameprice">
+        <h3> Jollof & meat </h3>
+        <p> remove </p>
+    </div>
 
-            <tr>
-            <td>{props.name}<span onClick = { () => props.removeOrder(props.index) }>remove</span></td>
-            <td>{ props.price } </td>
-            </tr>
-          
-           
+    <div>
+        
+    </div>
+</>
 );
 
 OrderTable.propTypes = {

@@ -1,14 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import naira from '../../img/naira.png';
+import add from '../../assets/img/icons/add.png';
+import { MealItemDiv } from './stlye';
 
+const MenuTable = ({ name, price, url, index, id, sendToOrderState }) => (
+    <MealItemDiv>
 
-const MenuTable = props => (
+            <div>
+            <img src={url} alt={url.split('App/')[1]} />
+            </div>
 
-    <tr>
-    <td className="user_menu_chars umchar"><div className="user_menu_item" >{ props.name }</div><span className="price"><img src={naira} alt="naira" />{ props.price } </span></td>
-    <td className="user_menu_chars"> <button className="usermenu_addbtn" onClick = { () => props.sendToOrderState(props.id, props.name, props.price) }> Add </button> </td>
-    </tr>
+            <div className="nameprice">
+                <h3> {name} </h3>
+                <p> {price} </p>
+            </div>
+
+            <div>
+                <img src={add} className="add-icon" alt="add" onClick ={ ()=> sendToOrderState(id)} />
+            </div>
+    </MealItemDiv>
 
 );
 
@@ -17,6 +27,7 @@ MenuTable.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    url: PropTypes.string,
     sendToOrderState: PropTypes.func.isRequired
 };
 
