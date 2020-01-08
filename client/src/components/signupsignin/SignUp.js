@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RitHeader from './RitadelLogoHeader';
 import { Link } from 'react-router-dom';
-import  styled from 'styled-components';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import {LoginSigupWrap, LoginSigupDiv} from './Login';
