@@ -79,7 +79,7 @@ class Menu extends Component {
         </MealContentDiv>
 
 
-        <Nav firstIcon={homeIcon} firstIconalt="home" firstIconLink="#" allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="ITEMS: " />
+        <Nav firstIcon={homeIcon} firstIconalt="home" firstIconLink="#" trash={true} allOrdersLength= { this.state.orders.length  } username =  { this.getUser() } title="ITEMS: " />
       </>
     );
   }
