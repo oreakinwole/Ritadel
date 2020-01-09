@@ -52,8 +52,12 @@ export default class SignUp extends Component {
         }
         this.setState({ ...this.state, isSigningup: true});
         //  To check if the password and confirm passwords match
-        if (this.state.password !== this.state.confirmPassword) return toast.error('Your Password does not match, try again');
-
+        if (this.state.password !== this.state.confirmPassword){
+            toast.error('Your Password does not match, try again');
+            this.setState({ ...this.state, signupError: true, isSigningup: false});
+            return;
+        } 
+        
         try {
             // Sending all the data for registering a user to the backend
             await axios.post('/api/users', { 'username': this.state.username, 'email': this.state.email, 'password': this.state.password });
