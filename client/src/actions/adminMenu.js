@@ -6,7 +6,7 @@ export const getMealsfromDbAsMenu = () => async dispatch => {
 
      const res = await axios.get('/api/meals', {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
      });
 
@@ -19,7 +19,7 @@ export const postMeal = (id) => async dispatch => {
     const res = await axios.post('/api/menu/' + id, {}, 
     {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     }
 

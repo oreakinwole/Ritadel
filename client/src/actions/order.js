@@ -10,7 +10,7 @@ export const forwardOrder = array => dispatch => {
         const res = await axios.post('/api/orders/' + id, {}, 
         {
             headers: {
-                ritadelToken: sessionStorage.getItem('ritadeltoken')
+                ritadelToken: localStorage.getItem('ritadeltoken')
             }
         }
     
@@ -30,7 +30,7 @@ export const getOrders = () => async dispatch => {
 
     const res = await axios.get('/api/orders', {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
         });
     

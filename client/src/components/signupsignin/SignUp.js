@@ -12,7 +12,10 @@ export default class SignUp extends Component {
         username: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        isSigningup: false,
+        signupSucces: false,
+        signupError: false
     }
 
     // To get the Username Input
@@ -43,20 +46,29 @@ export default class SignUp extends Component {
     submit = async (e) => {
         e.preventDefault();
 
-        //  To check if the password and confirm passwords match
-        if (this.state.password !== this.state.confirmPassword) {
-            toast.error('Your Passsword does not match, try again');
+        if (this.state.username === '' || this.state.email === '' || this.state.password === '') {
+            toast.error('all fields must be filled');
+            return;
         }
+        this.setState({ ...this.state, isSigningup: true});
+        //  To check if the password and confirm passwords match
+        if (this.state.password !== this.state.confirmPassword) return toast.error('Your Password does not match, try again');
 
-        // Sending all the data for registering a user to the backend
-        await axios.post('/api/users', { "username": this.state.username, "email": this.state.email, "password": this.state.password });
-        this.setState( { username: '', email: '', password: '', confirmPassword: '' });
+        try {
+            // Sending all the data for registering a user to the backend
+            await axios.post('/api/users', { 'username': this.state.username, 'email': this.state.email, 'password': this.state.password });
+            // this.setState( { username: '', email: '', password: '', confirmPassword: '' });
 
-        toast.success('Registration Successful');
+            this.setState({ ...this.state, signupSucces: true, isSigningup: false});
+            toast.success('Registration Successful');
 
-        // Redirecting to Login after Registration Completed at the server
-        setTimeout(()=> window.location.assign("/"), 2000);
-
+            // Redirecting to Login after Registration Completed at the server
+            setTimeout(()=> window.location.assign('/'), 2000);
+        } catch(error) {
+            this.setState({ ...this.state, isSigningup: false, signupSucces: false, signupError: true });
+            toast.error(error.response.data);
+        }
+        
     };
 
     render() { 
@@ -99,7 +111,7 @@ export default class SignUp extends Component {
                             placeholder="Confirm Password"
                             className="frminput"
                         />  
-                        <button type="submit" className="btn">Sign up </button>
+                        <button type="submit" className="btn">{ this.state.isSigningup ? 'Signing up' : 'Sign up' } </button>
                         <p>Already have an account? &nbsp;<Link to="/">Log In</Link></p>
                     </form>
                     </LoginSigupDiv>

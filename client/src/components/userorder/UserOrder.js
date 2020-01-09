@@ -44,11 +44,11 @@ class UserOrder extends Component {
   }
 
   componentDidMount() {
+    const user = localStorage.getItem('ritadeltoken');
+    if (!user) return window.location.assign('/');
+    this.props.getOrders();
 
-   this.props.getOrders();
-
-   this.setState( { orders: this.props.preOrder });
-
+    this.setState( { orders: this.props.preOrder });
   }
 
   executeOrder = () => {
@@ -61,7 +61,7 @@ class UserOrder extends Component {
 
   getUser = () => {
 
-    const user = sessionStorage.getItem('currentUser');
+    const user = localStorage.getItem('currentUser');
     return user;
 
   }

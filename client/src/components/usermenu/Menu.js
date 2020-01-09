@@ -26,7 +26,8 @@ class Menu extends Component {
 
   // Making a request to the backend  to get the Menu once Componenct Mounts
   componentDidMount() {
-
+    const user = localStorage.getItem('ritadeltoken');
+    if (!user) return window.location.assign('/');
     this.props.loadMenu();
     
   }
@@ -47,7 +48,7 @@ class Menu extends Component {
   // To get the current user set during Login
   getUser = () => {
 
-    const user = sessionStorage.getItem('currentUser');
+    const user = localStorage.getItem('currentUser');
     return user;
 
   }

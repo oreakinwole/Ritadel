@@ -10,7 +10,7 @@ export const addMeal = (name, price) => async dispatch => {
     },
     {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     }
     );
@@ -24,7 +24,7 @@ export const removeMeal = (id, index) => async dispatch => {
     await axios.delete('/api/meals/' + id, 
     {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     }
 
@@ -43,7 +43,7 @@ export const updateMeal = (id, index, name, price) => async dispatch => {
     },
     {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     }
 
@@ -57,7 +57,7 @@ export const getMeals = () => async dispatch => {
 
     const res = await axios.get('/api/meals', {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
         });
     

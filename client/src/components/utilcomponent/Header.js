@@ -31,7 +31,7 @@ const Header = props => (
             onClick = { 
                 () => {
 
-                sessionStorage.removeItem('ritadeltoken');
+                localStorage.removeItem('ritadeltoken');
                 
                 window.location.assign("/");
                 

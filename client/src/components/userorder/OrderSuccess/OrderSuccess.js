@@ -39,7 +39,7 @@ const OrderSuccess = ()=> (
           
         </MealContentDiv>
 
-      <Nav firstIcon={homeIcon} firstIconalt="home" firstIconLink="/usermenu" username = "Ore" />
+      <Nav firstIcon={homeIcon} firstIconalt="home" firstIconLink="/usermenu" username = {localStorage.getItem('currentUser')} />
   </>
 );
 

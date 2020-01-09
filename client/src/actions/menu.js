@@ -5,7 +5,7 @@ export const getMenu = () => async dispatch => {
 
     const res = await axios.get('/api/menu',  {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     });
   
@@ -18,7 +18,7 @@ export const sendOrder = (id, index) => async dispatch => {
     await axios.post('/api/orders/' + id, {}, 
     {
         headers: {
-            ritadelToken: sessionStorage.getItem('ritadeltoken')
+            ritadelToken: localStorage.getItem('ritadeltoken')
         }
     }
 

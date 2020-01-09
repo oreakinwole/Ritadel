@@ -38,7 +38,7 @@ router.post('/', async (req, res, next) => {
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
        
-    res.send('Welcome! You have been registered');
+    res.status(200).send('User registered');
     
   } catch (ex) {
     next(ex);
