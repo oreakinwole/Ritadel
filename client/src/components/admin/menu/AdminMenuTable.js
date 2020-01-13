@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MenuTable = props => (
+const MenuTable = ({id, name, price, postItem, posted}) => (
+    <>
+        <div className="nameprice">
+            <h2> {name} </h2>
+            <p> {price} </p>
+        </div>
 
-    <tr>
-    <td>{props.name} <span className="price">{props.price}</span></td>
-    <td><button className="btn addremove admenu_button" onClick = { () => props.postItem(props.id) }> Post </button></td>
-    </tr>
-                   
+         <div> <button onClick = { () => postItem(id) } > {posted ? 'Posted' : 'Post'} </button> </div>
+    </>                  
 );
 
 MenuTable.propTypes = {
     id:PropTypes.string.isRequired,
-    index:PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    postItem: PropTypes.func.isRequired
+    postItem: PropTypes.func.isRequired,
+    posted: PropTypes.bool.isRequired,
 };
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as UserActionCreators from '../../actions/user';
 import * as MenuActionCreators from '../../actions/menu';
 import * as PreOrderActionCreators from '../../actions/preOrder';
 import Header from '../utilcomponent/Header';
@@ -10,9 +11,6 @@ import Nav from '../utilcomponent/BottomNav';
 import homeIcon from '../../assets/img/icons/home.png';
 
 import { MealContentDiv} from './stlye';
-
-
-
  
 class Menu extends Component {
 
@@ -25,11 +23,9 @@ class Menu extends Component {
   }
 
   // Making a request to the backend  to get the Menu once Componenct Mounts
-  componentDidMount() {
-    const user = localStorage.getItem('ritadeltoken');
-    if (!user) return window.location.assign('/');
-    this.props.loadMenu();
-    
+  async componentDidMount() {
+    await this.props.validateToken();
+    await this.props.loadMenu();
   }
 
   // To send all the orders selected by the user to our current local state
@@ -47,10 +43,8 @@ class Menu extends Component {
 
   // To get the current user set during Login
   getUser = () => {
-
     const user = localStorage.getItem('currentUser');
     return user;
-
   }
 
   render() { 
@@ -87,20 +81,20 @@ class Menu extends Component {
 }
 
 //this is calling our Menu state in the Index reducer file
-const mapStateToProps = state => (
+const mapStateToProps = ({menu}) => (
   {
-        menu: state.menu
+    menu
   }
-
 );
 
 // By specifying this as the second argument in our connect function below, dispatch will then be passed through this rather than giving dispatch to our component " Menu "
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => (
+  {
     loadMenu: bindActionCreators(MenuActionCreators.getMenu, dispatch),
-    sendOrders: bindActionCreators(PreOrderActionCreators.sendOrders, dispatch)
+    sendOrders: bindActionCreators(PreOrderActionCreators.sendOrders, dispatch),
+    validateToken: bindActionCreators(UserActionCreators.validateToken, dispatch)
   }
-};
+);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

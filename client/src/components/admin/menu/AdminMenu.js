@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as AdminMenuActionCreators from '../../../actions/adminMenu';
-import Header from '../../usermenu/Header';
+import Header from '../../utilcomponent/Header';
 import MenuTable from './AdminMenuTable';
-import BottomNav from './BottomNav';
+import Nav from '../../utilcomponent/AdminBottomNav';
+import {MealContentDiv} from '../../usermenu/stlye';
+import {OrderItemDiv} from '../../userorder/UserOrder';
+import homeIcon from '../../../assets/img/icons/home.png';
 
 
 class AdminMenu extends Component {
@@ -13,75 +16,72 @@ class AdminMenu extends Component {
     static propTypes = {
       adMenu: PropTypes.array.isRequired,
     };
+
+    state = {
+      posted: false
+    }
   
     componentDidMount() {
+      const user = localStorage.getItem('ritadeltoken');
+      if (!user) return window.location.assign('/');
       this.props.getMealsAsMenu();
+      console.log(process.env.SECRET_KEY);
+    }
+
+    getUser = () => {
+      const user = localStorage.getItem('currentUser');
+      return user;
+    }
+
+    postItem = id => {
+      this.props.postMeal(id);
+      this.setState({ posted: true });
     }
 
     render() { 
   
       const { adMenu } = this.props;
-
-      
-  
-  
-      const Menu =  adMenu.map((item, index) => 
-  
-        <MenuTable
-              id = { item._id }
-              index = {index} 
-              name = {item.name}
-              price={item.price}
-              key={item.name}
-              postItem = { this.props.postItem } 
-        
-        />
-    );
   
       return (
-        <div>     
+        <>
 
-        <Header  headerTitle="Menu"/>
-    
-    
-    <section className="meal_table">
-        <table>
-            <tbody>
-    
-        { Menu }
-    
-            </tbody>
-               
-        </table>
-               <a href="/" className="btn addremove reload_done">Reload</a>
-                <button className="btn addremove reload_done">Done</button>
-        
-    </section>
-            
+        <Header headerTitle="Menu" />
+        <MealContentDiv>     
+        { 
+          adMenu.map((item, index) =>  
+            <OrderItemDiv>
+              <MenuTable
+                key={index}
+                id = {item._id} 
+                name = {item.name}
+                price={item.price}
+                postItem = { this.postItem } 
+                posted = { this.state.posted }
+              />
+            </OrderItemDiv>  
+        )
+        }
+        </MealContentDiv>    
            
-        <BottomNav theMenu={ adMenu } clearEvery={ this.props.clearMenu } />
-            
-        </div>
-              );
-            }
-  }
+        <Nav username =  { this.getUser() } firstIcon={homeIcon} firstIconalt="home" firstIconLink="#" theMenu={ adMenu } clearEvery={ this.props.clearMenu } />
+        
+        </> 
+      )
+    }
+}
   
   const mapStateToProps = state => (
     {
           adMenu: state.adminMenu
     }
-  
   );
 
-  const mapDispatchToProps = dispatch => {
-    return {
-
-       postItem: bindActionCreators(AdminMenuActionCreators.postMeal, dispatch),
-       clearMenu: bindActionCreators(AdminMenuActionCreators.clearMenu, dispatch),
-       getMealsAsMenu: bindActionCreators(AdminMenuActionCreators.getMealsfromDbAsMenu, dispatch)
-
-    }
-  }
+  const mapDispatchToProps = dispatch => (
+    {
+      postMeal: bindActionCreators(AdminMenuActionCreators.postMeal, dispatch),
+      clearMenu: bindActionCreators(AdminMenuActionCreators.clearMenu, dispatch),
+      getMealsAsMenu: bindActionCreators(AdminMenuActionCreators.getMealsfromDbAsMenu, dispatch)
+    } 
+  );
    
   export default connect(mapStateToProps, mapDispatchToProps)(AdminMenu);
-

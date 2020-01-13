@@ -10,7 +10,7 @@ import SignUp from './components/signupsignin/SignUp';
 import Menu from './components/usermenu/Menu';
 import UserOrder from './components/userorder/UserOrder';
 import OrderSuccess from './components/userorder/OrderSuccess/OrderSuccess';
-// import AdminMenu from './components/admin/menu/AdminMenu';
+import AdminMenu from './components/admin/menu/AdminMenu';
 // import SetUpMeal from './components/admin/MealSetup/SetUpMeal';
 // import Sales from './components/admin/View Sales/Sales';
 
@@ -55,7 +55,7 @@ export default class App extends Component{
                     <Route path="/usermenu" component={ Menu } />
                     <Route path="/userorder" component={ UserOrder } />
                     <Route path="/ordersuccess" component={ OrderSuccess } />
-                    {/* <Route path="/adminmenu" component={ AdminMenu } /> */}
+                    <Route path="/adminmenu" component={ AdminMenu } />
                     {/* <Route path="/adminmealsetup" component={ SetUpMeal } /> */}
                     {/* <Route path="/adminsales" component={ Sales } /> */}
                 </Wrapper>

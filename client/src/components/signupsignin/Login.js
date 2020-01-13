@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import  styled from 'styled-components';
-import { toast } from 'react-toastify';
-import RitHeader from './RitadelLogoHeader';
-
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import * as UserActionCreators from '../../actions/user';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import  styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import RitHeader from './RitadelLogoHeader';
 import pattern from '../../assets/img/pattern.jpg';
  
 export const LoginSigupWrap = styled.div`
@@ -86,52 +88,25 @@ export const LoginSigupDiv = styled.div`
         color: #fff;
     }
 `;
-export default class Login extends Component {
+
+class Login extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired
+    };
 
     state = {
         email: '',
         password: '',
-        isLoggingin: false,
-        loginSucces: false,
-        loginError: false
-
+        isLoggingIn: false,
     }
 
     // To handle the Login form Submit Event
     submit = async (e) => {
         e.preventDefault();
-        this.setState({ ...this.state, isLoggingin: true});
-
-        try {
-             //Our Backend is Expecting and email and Password, Using axios here to send the email and password to our Express API
-            const pRequest = await axios.post('/api/auth', { "email": this.state.email, "password": this.state.password });
-
-             // Making use of the session storage in the browser here to store the token given to us by the Server
-             localStorage.setItem('ritadeltoken', pRequest.headers.ritadeltoken);
-            //Emptying all the data in the state because we have gotten the data we need
-            this.setState( { email: '', password: '' });
-
-            localStorage.setItem( 'currentUser', pRequest.data);
-            this.setState({ ...this.state, isLoggingin: false, loginSucces: true });
-
-            setTimeout(()=> window.location.assign("/usermenu"), 2000);  
-        } catch (error) {
-
-            if (error.response.status === 400) {
-                this.setState({ ...this.state, isLoggingin: false, loginSucces: false, loginError: true });
-                toast.error('Invalid email or password.');
-            }else{
-                toast.error(error);
-            }
-            
-        }
-
-       
-       
-
-       
-
-    };
+        this.setState({ ...this.state, isLoggingIn: true});
+        await this.props.loginUser(this.state.email, this.state.password);
+        this.setState({ ...this.state, isLoggingIn: false });
+    }
 
     // To get the User Email Input
     onEmailChange = (e) => {
@@ -172,7 +147,7 @@ export default class Login extends Component {
                                 placeholder="Password" 
                                 /> 
                                 
-                         <button type="submit">  { this.state.isLoggingin ? 'Logging in' : 'Log in' }  </button> 
+                         <button type="submit">  { this.state.isLoggingIn ? 'Logging in' : 'Log in' }  </button> 
                             <p>Are you a new user? &nbsp;<Link to="/register" className="frmparag">Sign up</Link></p>
                         </form>
                 </LoginSigupDiv>
@@ -180,3 +155,17 @@ export default class Login extends Component {
         );
     }
 }
+
+const mapStateToProps = ({user}) => (
+    {
+        user
+    }
+);
+
+const mapDispatchToProps = dispatch => (
+    {
+        loginUser: bindActionCreators(UserActionCreators.loginUser, dispatch)
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps )(Login);

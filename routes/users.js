@@ -5,21 +5,15 @@ const express = require('express');
 const router = express.Router();
 const {User, validate} = require('../models/user');
 
-
-
 // All Api Calls for Users Module
-
  router.get('/me', authmd, async (req, res, next) => {
 
    try {
-
     const user = await User.findById(req.user._id).select('-password');
     res.send(user);
-    
    } catch (ex) {
      next(ex);
-   }
-  
+   } 
 });
 
 

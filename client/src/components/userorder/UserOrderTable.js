@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OrderTable = ({index, name, price}) => (
+const OrderTable = ({ name, price }) => (
     <>
         <div className="nameprice">
             <h2> {name} </h2>
@@ -13,7 +13,6 @@ const OrderTable = ({index, name, price}) => (
 );
 
 OrderTable.propTypes = {
-    index:PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired
 };

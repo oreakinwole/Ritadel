@@ -14,17 +14,14 @@ export const getMealsfromDbAsMenu = () => async dispatch => {
    
 };
 
-export const postMeal = (id) => async dispatch => {
-
-    const res = await axios.post('/api/menu/' + id, {}, 
-    {
-        headers: {
-            ritadelToken: localStorage.getItem('ritadeltoken')
+export const postMeal = id => async dispatch => {
+    await axios.post('/api/menu/' + id, {}, 
+        {
+            headers: {
+                ritadelToken: localStorage.getItem('ritadeltoken')
+            }
         }
-    }
-
     );
-
 };
 
 export const clearMenu = () => {

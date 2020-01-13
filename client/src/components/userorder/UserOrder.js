@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
+import * as UserActionCreators from '../../actions/user';
 import * as PreOrderActionCreators from '../../actions/preOrder';
 import * as OrderActionCreators from '../../actions/order';
 import Header from '../utilcomponent/Header';
 import OrderTable from './UserOrderTable';
 import Nav from '../../components/utilcomponent/BottomNav';
 import backIcon from '../../assets/img/icons/back-arrow.png';
-import {MealContentDiv} from '../usermenu/stlye'
+import {MealContentDiv} from '../usermenu/stlye';
 
 export const OrderItemDiv = styled.div`
   display: flex;
@@ -30,6 +31,25 @@ export const OrderItemDiv = styled.div`
     display: flex;
     flex-direction: column;
   }
+  // for Admin menu button
+  button{
+    outline: 0;
+    border: none;
+    margin: 20px auto;
+    padding 0 15px;
+    border-radius: 2px;
+    height: 36px;
+    font-size: 16px;
+    background-color: #450b0b;
+    text-align: center;
+    letter-spacing: .5px;
+    color: #fff;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #741c1c;
+    }
+}
 `;
 
 
@@ -43,9 +63,8 @@ class UserOrder extends Component {
     orders: []
   }
 
-  componentDidMount() {
-    const user = localStorage.getItem('ritadeltoken');
-    if (!user) return window.location.assign('/');
+  async componentDidMount() {
+    await this.props.validateToken();
     this.props.getOrders();
 
     this.setState( { orders: this.props.preOrder });
@@ -60,10 +79,8 @@ class UserOrder extends Component {
   }
 
   getUser = () => {
-
     const user = localStorage.getItem('currentUser');
     return user;
-
   }
 
   render() { 
@@ -97,7 +114,7 @@ class UserOrder extends Component {
                   <h2> Total price </h2>
               </div>
 
-                  <h2> {totalPrice} </h2>
+              <h2> {totalPrice} </h2>
           </>
         </OrderItemDiv>
 
@@ -119,7 +136,8 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => {
   return {
     getOrders: bindActionCreators(PreOrderActionCreators.getOrders, dispatch),
-    approveOrders: bindActionCreators(OrderActionCreators.forwardOrder, dispatch)
+    approveOrders: bindActionCreators(OrderActionCreators.forwardOrder, dispatch),
+    validateToken: bindActionCreators(UserActionCreators.validateToken, dispatch)
 };
 
 }
