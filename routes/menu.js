@@ -35,7 +35,20 @@ router.post('/:id', [authmd, admin], async (req, res, next) => {
             mealItem: food
     });
         menuobj = await menuobj.save();
-         res.send('done'); 
+         res.status(201).send('done'); 
+    } catch (ex) {
+        next(ex);
+    }
+ });
+
+router.delete('/:id', [authmd, admin], async (req, res, next) => {
+
+    try {
+        const item = await Menu.findById(req.params.id);
+        if (!item) return res.status(404).send('Item not found');
+
+        await item.remove();
+         res.status(200).send('item deleted'); 
     } catch (ex) {
         next(ex);
     }

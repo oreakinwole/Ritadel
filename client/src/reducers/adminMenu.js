@@ -7,8 +7,7 @@ export default function adminMenu(state=initialState, action) {
 
     switch(action.type) {
         case GET_MEALS:
-                const allTheMeals = action.payload;
-                return allTheMeals;
+            return action.payload;
 
        /*  case AdminMenuActionTypes.REMOVE_ITEM:
             return [
@@ -17,9 +16,18 @@ export default function adminMenu(state=initialState, action) {
             ]; */
 
         case AdminMenuActionTypes.CLEAR_MENU:
-            let array = state.slice()
-            array.length = 0
+            let array = state.slice();
+            array.length = 0;
             return array;
+
+        case AdminMenuActionTypes.POST_SUCCESS:
+            const newState = state.slice();
+            let item = newState.find(item => item._id === action.payload);
+            item.isPosted = true;
+            
+            return [
+                ...newState,
+            ];
 
             default:
                 return state;

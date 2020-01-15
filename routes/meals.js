@@ -9,7 +9,7 @@ const router = express.Router();
 // All Api Calls for Meals Module
 
 /* get Meals*/
-router.get('/',  [authmd, admin], async (req, res, next) => {
+router.get('/', [authmd, admin], async (req, res, next) => {
     try {
         const allMeals = await Meal.find();
         const results = _.map(allMeals, function(currentObject) {

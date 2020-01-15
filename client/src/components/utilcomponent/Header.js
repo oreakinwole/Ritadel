@@ -56,9 +56,9 @@ const Header = props => (
 );
 
 Header.propTypes = {
-    actionFunction: PropTypes.func.isRequired,
+    actionFunction: PropTypes.func,
     headerTitle: PropTypes.string.isRequired,
-    nexticon:  PropTypes.bool.isRequired
+    nexticon:  PropTypes.bool
 }
 
 export default Header;

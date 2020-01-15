@@ -16,26 +16,14 @@ class AdminMenu extends Component {
     static propTypes = {
       adMenu: PropTypes.array.isRequired,
     };
-
-    state = {
-      posted: false
-    }
   
     componentDidMount() {
-      const user = localStorage.getItem('ritadeltoken');
-      if (!user) return window.location.assign('/');
       this.props.getMealsAsMenu();
-      console.log(process.env.SECRET_KEY);
     }
 
     getUser = () => {
       const user = localStorage.getItem('currentUser');
       return user;
-    }
-
-    postItem = id => {
-      this.props.postMeal(id);
-      this.setState({ posted: true });
     }
 
     render() { 
@@ -55,8 +43,9 @@ class AdminMenu extends Component {
                 id = {item._id} 
                 name = {item.name}
                 price={item.price}
-                postItem = { this.postItem } 
-                posted = { this.state.posted }
+                isPosted={ item.isPosted || false}
+                postItem = {this.props.postMeal}
+                // removeItem = {this.props.removeMealFromMenu}
               />
             </OrderItemDiv>  
         )
@@ -80,7 +69,8 @@ class AdminMenu extends Component {
     {
       postMeal: bindActionCreators(AdminMenuActionCreators.postMeal, dispatch),
       clearMenu: bindActionCreators(AdminMenuActionCreators.clearMenu, dispatch),
-      getMealsAsMenu: bindActionCreators(AdminMenuActionCreators.getMealsfromDbAsMenu, dispatch)
+      getMealsAsMenu: bindActionCreators(AdminMenuActionCreators.getMealsfromDbAsMenu, dispatch),
+      // removeMealFromMenu: bindActionCreators(AdminMenuActionCreators.removeMealFromMenu, dispatch)
     } 
   );
    

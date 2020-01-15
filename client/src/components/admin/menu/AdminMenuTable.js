@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MenuTable = ({id, name, price, postItem, posted}) => (
+const MenuTable = ({id, name, price, postItem, removeItem, isPosted}) => (
     <>
         <div className="nameprice">
             <h2> {name} </h2>
             <p> {price} </p>
         </div>
 
-         <div> <button onClick = { () => postItem(id) } > {posted ? 'Posted' : 'Post'} </button> </div>
+         <div> <button onClick = { () => postItem(id) } > { isPosted ? 'Posted' : 'Post' } </button> </div>
     </>                  
 );
 
@@ -17,7 +17,8 @@ MenuTable.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     postItem: PropTypes.func.isRequired,
-    posted: PropTypes.bool.isRequired,
+    // removeItem: PropTypes.func.isRequired,
+    isPosted: PropTypes.bool
 };
 
 
