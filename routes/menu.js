@@ -48,7 +48,7 @@ router.delete('/:id', [authmd, admin], async (req, res, next) => {
         if (!item) return res.status(404).send('Item not found');
 
         await item.remove();
-         res.status(200).send('item deleted'); 
+        res.status(200).send('item deleted'); 
     } catch (ex) {
         next(ex);
     }

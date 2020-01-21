@@ -20,15 +20,20 @@ export default function adminMenu(state=initialState, action) {
             array.length = 0;
             return array;
 
-        case AdminMenuActionTypes.POST_SUCCESS:
-            const newState = state.slice();
-            let item = newState.find(item => item._id === action.payload);
-            item.isPosted = true;
+        case AdminMenuActionTypes.DO_ISPOSTED:
+            const posted = state.slice().filter(admenuthing => action.payload.find(usermenuthing => usermenuthing.mealItem._id === admenuthing._id));
+            const postedIds = posted.map(item => item._id);
             
-            return [
-                ...newState,
-            ];
-
+            return state.map(stuff => {
+                if(postedIds.includes(stuff._id)){
+                    return {
+                        ...stuff,
+                        isPosted: true
+                    };
+                }
+                return stuff;
+            });
+  
             default:
                 return state;
     }

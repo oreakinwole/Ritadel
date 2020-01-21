@@ -12,8 +12,8 @@ export const getMealsfromDbAsMenu = () => async dispatch => {
      });
 
      dispatch({ type: GET_MEALS, payload: res.data });
+    
     } catch (error) {
-        error.response.status === 403 ? window.location.assign('/usermenu') : window.location.assign('/');
         return;
     }
 
@@ -27,33 +27,39 @@ export const postMeal = id => async dispatch => {
                 ritadelToken: localStorage.getItem('ritadeltoken')
             }
         }
+        
     )
-     dispatch({type: AdminMenuActionTypes.POST_SUCCESS, payload: id});
+    toast.success('Meal Posted Successfully');
+
     }catch(error) {
         if (error.response.status === 404) return toast.error('Invalid ID');
         
     }
 };
 
-/* export const removeMealFromMenu = id => async dispatch => {
+export const removeMealFromMenu = id => async dispatch => {
     try{
-        await axios.delte('/api/menu/' + id,
+        await axios.delete('/api/menu/' + id,
         {
             headers: {
                 ritadelToken: localStorage.getItem('ritadeltoken')
             }
         }
-    )
-    //  dispatch({type: AdminMenuActionTypes.POST_SUCCESS, payload: id});
+    );
+    toast.info('Meal Removed');
+
     }catch(error) {
-        return toast.error('Failed to delete');
-        
+        return toast.error('Failed to Remove');
     }
-}; */
+};
 
 export const clearMenu = () => {
     return {
         type: AdminMenuActionTypes.CLEAR_MENU
     };
+};
+
+export const doIsPosted = array => {
+    return { type: AdminMenuActionTypes.DO_ISPOSTED, payload: array};
 };
 

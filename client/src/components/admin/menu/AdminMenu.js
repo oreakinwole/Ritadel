@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as AdminMenuActionCreators from '../../../actions/adminMenu';
+import { getMenu } from '../../../actions/menu';
 import Header from '../../utilcomponent/Header';
-import MenuTable from './AdminMenuTable';
 import Nav from '../../utilcomponent/AdminBottomNav';
 import {MealContentDiv} from '../../usermenu/stlye';
 import {OrderItemDiv} from '../../userorder/UserOrder';
@@ -15,10 +15,14 @@ class AdminMenu extends Component {
 
     static propTypes = {
       adMenu: PropTypes.array.isRequired,
+      userMenu: PropTypes.array
     };
   
-    componentDidMount() {
-      this.props.getMealsAsMenu();
+    async componentDidMount() {
+      await this.props.getMealsAsMenu();
+      await this.props.loadUserMenu();
+      this.props.doIsPosted(this.props.userMenu);
+      
     }
 
     getUser = () => {
@@ -36,17 +40,25 @@ class AdminMenu extends Component {
         <Header headerTitle="Menu" />
         <MealContentDiv>     
         { 
-          adMenu.map((item, index) =>  
-            <OrderItemDiv>
-              <MenuTable
-                key={index}
-                id = {item._id} 
-                name = {item.name}
-                price={item.price}
-                isPosted={ item.isPosted || false}
-                postItem = {this.props.postMeal}
-                // removeItem = {this.props.removeMealFromMenu}
-              />
+          adMenu.map(item =>  
+            <OrderItemDiv key={item._id}>
+                <div className="nameprice">
+                  <h2> {item.name} </h2>
+                  <p> {item.price} </p>
+                </div>
+
+                <div> 
+                  <button onClick = { item.isPosted ? ()=> {
+                  const theObject = this.props.userMenu.find(thing => thing.mealItem._id === item._id);
+                  this.props.removeMealFromMenu(theObject._id);
+
+                 } : ()=> this.props.postMeal(item._id) } > 
+
+                 { item.isPosted ? 'Remove' : 'Post' }
+                 
+                 </button>
+                 
+                 </div>            
             </OrderItemDiv>  
         )
         }
@@ -61,7 +73,8 @@ class AdminMenu extends Component {
   
   const mapStateToProps = state => (
     {
-          adMenu: state.adminMenu
+          adMenu: state.adminMenu,
+          userMenu: state.menu
     }
   );
 
@@ -70,7 +83,9 @@ class AdminMenu extends Component {
       postMeal: bindActionCreators(AdminMenuActionCreators.postMeal, dispatch),
       clearMenu: bindActionCreators(AdminMenuActionCreators.clearMenu, dispatch),
       getMealsAsMenu: bindActionCreators(AdminMenuActionCreators.getMealsfromDbAsMenu, dispatch),
-      // removeMealFromMenu: bindActionCreators(AdminMenuActionCreators.removeMealFromMenu, dispatch)
+      loadUserMenu: bindActionCreators(getMenu, dispatch),
+      doIsPosted: bindActionCreators(AdminMenuActionCreators.doIsPosted, dispatch),
+      removeMealFromMenu: bindActionCreators(AdminMenuActionCreators.removeMealFromMenu, dispatch)
     } 
   );
    
